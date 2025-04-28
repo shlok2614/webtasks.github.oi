@@ -8,7 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-import joblib
+
 
 news_df = pd.read_csv('train.csv')
 news_df = news_df.fillna(' ')
@@ -44,9 +44,7 @@ X_train,X_test, Y_train, Y_test = train_test_split(X,y, test_size=0.2, stratify=
 model = LogisticRegression()
 model.fit(X_train,Y_train)
 
-# Save vectorizer and model
-joblib.dump(vectorizer, 'vectorizer.pkl')
-joblib.dump(model, 'model.pkl')
+
 
 
 
