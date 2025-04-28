@@ -1,4 +1,8 @@
 import streamlit as st
+import pickle
+
+vectorizer = pickle.load(open('vectorizer.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
 
 st.title('Fake News Detector')
 input_text = st.text_input('Enter news Article')
