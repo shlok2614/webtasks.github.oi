@@ -1,23 +1,27 @@
 import streamlit as st
-import joblib  # to load the saved vectorizer and model
 
-# Load the vectorizer and model
-vectorizer = joblib.load('vectorizer.pkl')  # make sure you have this file
-model = joblib.load('model.pkl')            # make sure you have this file
-
+# Streamlit App
 st.title('📰 Fake News Detector')
-input_text = st.text_input('Enter news article text:')
+input_text = st.text_area('Enter News Article Text:', height=200)
 
-def prediction(text):
-    transformed_text = vectorizer.transform([text])
-    prediction = model.predict(transformed_text)
-    return prediction[0]
+def preprocess_input(text):
+    text = stemming(text)
+    text = vector.transform([text])
+    return text
 
-if input_text:
-    pred = prediction(input_text)
-    if pred == 1:
-        st.error('🚨 The News is Fake!')
+def prediction(input_text):
+    processed_input = preprocess_input(input_text)
+    pred = model.predict(processed_input)
+    return pred[0]
+
+if st.button('Predict'):
+    if input_text.strip() == "":
+        st.warning("Please enter some news text to check.")
     else:
-        st.success('✅ The News is Real!')
+        pred = prediction(input_text)
+        if pred == 1:
+            st.error('🚨 The News is Fake!')
+        else:
+            st.success('✅ The News is Real!')
 
 
