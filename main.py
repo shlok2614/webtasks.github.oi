@@ -1,4 +1,5 @@
 import streamlit as st
+import pickle
 
 st.title('Fake News Detector')
 input_text = st.text_input('Enter news Article')
