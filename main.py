@@ -1,19 +1,18 @@
 import streamlit as st
 
-st.title("📰 Fake News Detection")
-st.write("Enter the news article below to check if it's Real or Fake.")
+st.title('Fake News Detector')
+input_text = st.text_input('Enter news Article')
 
-user_input = st.text_area("News Article Text", height=200)
+def prediction(input_text):
+    input_text = vector.transform([input_text])
+    prediction = model.predict(input_text)
+    return prediction[0]
 
-if st.button("Predict"):
-    if user_input:
-        processed_input = preprocess_text(user_input)
-        vectorized_input = vectorizer.transform([processed_input])
-        prediction = model.predict(vectorized_input)[0]
-        result = "Real News 🟢" if prediction == 1 else "Fake News 🔴"
-        st.subheader("Prediction:")
-        st.success(result)
-    else:
-        st.warning("Please enter the news article text to make a prediction.")
+if input_text:
+    pred = prediction(input_text)
+    if pred == 1:
+        st.write('The News is Fake')
+    else :
+        st.write('The News is Real')
 
 
