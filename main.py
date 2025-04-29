@@ -1,4 +1,4 @@
-import streamlit sa st
+import streamlit as st
 
 st.title("📰 Fake News Detection")
 st.write("Enter the news article below to check if it's Real or Fake.")
